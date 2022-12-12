@@ -1,20 +1,17 @@
-FROM alpine
-
-# Add nodeJS to the container because alpine doesn't have it
-RUN apk add --update nodejs yarn
+FROM node:latest
 
 # Set working directory
 WORKDIR /app
 
 # Copy package.json and yarn.lock to the container
-COPY package*.json ./
-COPY yarn*.lock ./
+COPY ./client/client-app/package*.json ./
+COPY ./client/client-app/yarn*.lock ./
 
 # Install dependencies
-RUN yarn install --ignore-engines
+RUN yarn
 
 # Copy the source code from the repository to the container
-COPY ./ ./
+COPY ./client/client-app/* ./
 
 # Run the start-command which builds and serves the app
 CMD ["yarn", "start"]

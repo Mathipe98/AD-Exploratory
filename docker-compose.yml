@@ -1,25 +1,10 @@
 version: "3.4"
 services:
-  cloudsql-proxy:
-    image: gcr.io/cloudsql-docker/gce-proxy:1.31.2
-    container_name: cloudsql-proxy
-    volumes:
-      - ./credentials/GCP-Service-Account.json:/usr/config/GCP-Service-Account.json
-    ports:
-      - 5432:5432
-    command: /cloud_sql_proxy  -instances="arealize-pipeline-1:europe-west1:arealize-backend-postgresql"=tcp:0.0.0.0:5432 -credential_file=/usr/config/GCP-Service-Account.json
-    restart: always
-  backend-dashboard:
-    image: nodebackendimage
+  client:
+    image: client
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./client/Dockerfile
     ports:
-      - 10000:10000
-    environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/GCP-Service-Account.json
-      - PORT=10000
-      - DEPLOYED=false
-      - USE_DOCKER=true
-    depends_on:
-      - cloudsql-proxy
+      - 3000:3000
+    
