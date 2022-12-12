@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0</jakartaee>
+        <port.number>8080</port.number>
+	    <service.url>http://0.0.0.0:${port.number}</service.url>
     </properties>
     
     <dependencies>
