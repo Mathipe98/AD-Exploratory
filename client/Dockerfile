@@ -11,7 +11,7 @@ COPY ./client/client-app/yarn*.lock ./
 RUN yarn
 
 # Copy the source code from the repository to the container
-COPY ./client/client-app/* ./
+COPY ./client/client-app/ ./
 
 # Run the start-command which builds and serves the app
 CMD ["yarn", "start"]
