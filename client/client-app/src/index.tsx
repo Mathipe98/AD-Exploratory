@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './store/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+console.log('Starting server.');
 root.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -4,14 +4,14 @@ FROM node:latest
 WORKDIR /app
 
 # Copy package.json and yarn.lock to the container
-COPY ./client/client-app/package*.json ./
-COPY ./client/client-app/yarn*.lock ./
+COPY package*.json ./
+COPY yarn*.lock ./
 
 # Install dependencies
 RUN yarn
 
 # Copy the source code from the repository to the container
-COPY ./client/client-app/ ./
+COPY . .
 
 # Run the start-command which builds and serves the app
 CMD ["yarn", "start"]
