@@ -1,17 +1,28 @@
 package com.mycompany.components.sql;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
 public class DbConnector {
 
     private Connection conn;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public void open() {
         try {
-            String dbConnection = "jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2";
+            logger.info("Opening SQL Connection");
+            String dbConnection = "jdbc:derby://db:1527/pr2;user=pr2;password=pr2";
             this.conn = DriverManager.getConnection(dbConnection);
+            logger.info("Printing schemas.");
+            ResultSet rs = conn.getMetaData().getCatalogs();
+            while (rs.next()) {
+                logger.info("TABLE_CAT = " + rs.getString("TABLE_CAT") );
+            }
         } catch (SQLException e) {
             System.out.println("Opening database-connection failed.");
+            System.out.println(e);
             throw new RuntimeException(e);
         }
     }
@@ -21,6 +32,7 @@ public class DbConnector {
             return conn.prepareStatement(query);
         } catch (SQLException e) {
             System.out.println("Error while creating PreparedStatement.");
+            System.out.println(e);
             throw new RuntimeException(e);
         }
     }

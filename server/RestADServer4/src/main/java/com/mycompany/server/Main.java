@@ -26,8 +26,12 @@ public class Main {
         // in com.dekses.jersey.docker.demo package
         final ResourceConfig rc = new ResourceConfig().packages(
                 "com.mycompany.server",
-                "com.mycompany.components"
+                "com.mycompany.components",
+                "org.apache.derby"
         );
+
+        rc.register(new CORSFilter());
+        rc.register(CORSFilter.class);
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI

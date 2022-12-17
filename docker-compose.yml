@@ -7,6 +7,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+    links:
+      - db
+    depends_on:
+      - db
   client:
     image: client
     build:
@@ -18,3 +22,12 @@ services:
       - server
     depends_on:
       - server
+  db:
+    image: db
+    build:
+      context: ./db2
+      dockerfile: Dockerfile
+    env_file:
+      - ./db2/sqlserver.env
+    ports:
+      - 1527:1527
