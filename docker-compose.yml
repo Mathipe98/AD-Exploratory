@@ -25,9 +25,9 @@ services:
   db:
     image: db
     build:
-      context: ./db2
+      context: ./db
       dockerfile: Dockerfile
     env_file:
-      - ./db2/sqlserver.env
+      - ./db/sqlserver.env
     ports:
       - 1527:1527
